@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Commit Viewers</title>
+</head>
+
+<body>
+    <h1>Developers</h1>
+    <ul>
+        <li th:each="developer : ${developers}">
+            <p><strong>Username:</strong> <span th:text="${developer.username}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${developer.email}"></span></p>
+
+            <h3>Commits:</h3>
+            <div th:if="${#lists.isEmpty(developer.commits)}">
+                <p>Herhangi bir commit yok.</p>
+            </div>
+            <div th:if="${!#lists.isEmpty(developer.commits)}">
+                <p>Commit Sayısı: <span th:text="${#lists.size(developer.commits)}"></span></p>
+                <!-- Commitler varsa bu buton görünsün -->
+                <a th:href="@{/commits/{username}(username=${developer.username})}">
+                    <button>Commitleri Listele</button>
+                </a>
+            </div>
+        </li>
+    </ul>
+</body>
+
+</html>

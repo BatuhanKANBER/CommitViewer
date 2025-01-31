@@ -1,5 +1,7 @@
 package com.commit.viewer.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.commit.viewer.models.Developer;
@@ -19,7 +21,11 @@ public class DeveloperService {
         developerRepository.saveAndFlush(developer);
     }
 
-    public Developer getDeveloper(String email) {
-        return developerRepository.findByEmail(email);
+    public Developer getDeveloper(String username) {
+        return developerRepository.findByUsername(username);
+    }
+
+    public List<Developer> getDevelopers() {
+        return developerRepository.findAll();
     }
 }

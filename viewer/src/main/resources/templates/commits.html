@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Commit Viewers</title>
+</head>
+
+<body>
+    <h1>Commits</h1>
+    <ul>
+        <li th:each="commit : ${commits}">
+            <p><strong>Hash:</strong> <span th:text="${commit.hash}"></span></p>
+            <p><strong>Timestamp:</strong> <span th:text="${commit.timestamp}"></span></p>
+            <p><strong>Author:</strong> <span th:text="${commit.author}"></span></p>
+        </li>
+    </ul>
+
+    <a href="/developers">Geri Dön</a>
+</body>
+
+</html>

@@ -29,14 +29,15 @@ public class CommitService {
         for (Map<String, Object> commitData : commits) {
             Map<String, Object> commitDetails = (Map<String, Object>) commitData.get("commit");
             Map<String, Object> authorDetails = (Map<String, Object>) commitDetails.get("author");
+            Map<String, Object> userId = (Map<String, Object>) commitData.get("author");
 
-            String username = ((String) authorDetails.get("name"));
+            String username = ((String) userId.get("login"));
             String email = ((String) authorDetails.get("email"));
-            if (developerService.getDeveloper(email) == null) {
+            if (developerService.getDeveloper(username) == null) {
                 developerService.save(username, email);
             }
 
-            Developer developer = developerService.getDeveloper(email);
+            Developer developer = developerService.getDeveloper(username);
             Commit commit = new Commit();
             commit.setHash((String) commitData.get("sha"));
             commit.setMessage((String) commitDetails.get("message"));
@@ -47,5 +48,10 @@ public class CommitService {
 
             commitRepository.save(commit);
         }
+    }
+
+    public List<Commit> getDeveloperCommits(String username) {
+        Developer developer = developerService.getDeveloper(username);
+        return commitRepository.findByDeveloper(developer);
     }
 }

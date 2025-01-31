@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Commit Viewers</title>
+</head>
+
+<body>
+    <h1>Fetch Commits</h1>
+
+    <form id="repoForm" method="post">
+        <label for="owner">Owner:</label>
+        <input type="text" id="owner" name="owner" placeholder="Enter repository owner" required />
+
+        <label for="repo">Repo:</label>
+        <input type="text" id="repo" name="repo" placeholder="Enter repository name" required />
+
+        <button type="submit">GETİR</button>
+    </form>
+    <div th:if="${successMessage}" class="alert alert-success">
+        <p th:text="${successMessage}"></p>
+    </div>
+
+    <div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
+</body>
+<script>
+    document.getElementById("repoForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var owner = document.getElementById("owner").value;
+        var repo = document.getElementById("repo").value;
+
+        var url = "/fetch/" + owner + "/" + repo;
+
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = url;
+
+        document.body.appendChild(form);
+        form.submit();
+    });
+</script>
+
+</html>
