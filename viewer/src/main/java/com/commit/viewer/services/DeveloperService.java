@@ -25,7 +25,7 @@ public class DeveloperService {
         return developerRepository.findByUsername(username);
     }
 
-    public List<Developer> getDevelopers() {
+    public List<Developer> getAllDevelopers() {
         return developerRepository.findAll();
     }
 }

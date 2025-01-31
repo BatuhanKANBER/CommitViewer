@@ -54,4 +54,8 @@ public class CommitService {
         Developer developer = developerService.getDeveloper(username);
         return commitRepository.findByDeveloper(developer);
     }
+
+    public Commit getCommit(String hash) {
+        return commitRepository.findByHash(hash);
+    }
 }

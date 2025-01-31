@@ -4,19 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Commit Viewers</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <h1>Commits</h1>
-    <ul>
-        <li th:each="commit : ${commits}">
-            <p><strong>Hash:</strong> <span th:text="${commit.hash}"></span></p>
-            <p><strong>Timestamp:</strong> <span th:text="${commit.timestamp}"></span></p>
-            <p><strong>Author:</strong> <span th:text="${commit.author}"></span></p>
-        </li>
-    </ul>
+    <div class="container">
+        <a href="/" class="home-icon"><i class="fas fa-home"></i></a>
 
-    <a href="/developers">Geri Dön</a>
+        <h1>Commits</h1>
+        <ul class="commit-list">
+            <li th:each="commit : ${commits}" class="commit-item">
+                <p><strong>Hash:</strong> <span th:text="${commit.hash}"></span></p>
+                <p><strong>Timestamp:</strong> <span th:text="${commit.timestamp}"></span></p>
+                <p><strong>Author:</strong> <span th:text="${commit.author}"></span></p>
+                <a th:href="@{/commit/{hash}(hash=${commit.hash})}">
+                    <button class="btn-detail">Detail</button>
+                </a>
+            </li>
+        </ul>
+
+        <a class="return" href="/developers">Back</a>
+    </div>
 </body>
 
 </html>

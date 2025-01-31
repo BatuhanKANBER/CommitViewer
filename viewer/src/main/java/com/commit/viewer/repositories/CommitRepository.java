@@ -9,4 +9,6 @@ import com.commit.viewer.models.Developer;
 
 public interface CommitRepository extends JpaRepository<Commit, String> {
         List<Commit> findByDeveloper(Developer developer);
+
+        Commit findByHash(String hash);
 }

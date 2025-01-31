@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Commit Viewers</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="/" class="home-icon"><i class="fas fa-home"></i></a>
+
+        <h1>Commit</h1>
+        <div th:if="${commit}">
+            <p><strong>Hash:</strong> <span th:text="${commit.hash}"></span></p>
+            <p><strong>Timestamp:</strong> <span th:text="${commit.timestamp}"></span></p>
+            <p><strong>Message:</strong> <span th:text="${commit.message}"></span></p>
+            <p><strong>Author:</strong> <span th:text="${commit.author}"></span></p>
+        </div>
+
+        <a class="return" th:href="@{/commits/{username}(username=${commit.author})}">Back</a>
+    </div>
+</body>
+
+</html>

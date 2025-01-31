@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class CommitController {
     private final CommitService commitService;
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home() {
         return "home";
     }
@@ -33,7 +33,7 @@ public class CommitController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Repo bulunamadı. Lütfen tekrar deneyin.");
         }
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     @GetMapping("/commits/{username}")
@@ -41,5 +41,12 @@ public class CommitController {
         List<Commit> commits = commitService.getDeveloperCommits(username);
         model.addAttribute("commits", commits);
         return "commits";
+    }
+
+    @GetMapping("/commit/{hash}")
+    public String getCommit(@PathVariable String hash, Model model) {
+        Commit commit = commitService.getCommit(hash);
+        model.addAttribute("commit", commit);
+        return "commit_details";
     }
 }

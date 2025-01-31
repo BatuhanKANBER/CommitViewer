@@ -4,44 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Commit Viewers</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
-    <h1>Fetch Commits</h1>
+    <a href="/" class="home-icon"><i class="fas fa-home"></i></a>
 
-    <form id="repoForm" method="post">
-        <label for="owner">Owner:</label>
-        <input type="text" id="owner" name="owner" placeholder="Enter repository owner" required />
+    <div class="container">
+        <h1>Fetch Commits</h1>
 
-        <label for="repo">Repo:</label>
-        <input type="text" id="repo" name="repo" placeholder="Enter repository name" required />
+        <form id="repoForm" method="post">
+            <label for="owner">Owner:</label>
+            <input type="text" id="owner" name="owner" placeholder="Enter repository owner" required />
 
-        <button type="submit">GETİR</button>
-    </form>
-    <div th:if="${successMessage}" class="alert alert-success">
-        <p th:text="${successMessage}"></p>
+            <label for="repo">Repo:</label>
+            <input type="text" id="repo" name="repo" placeholder="Enter repository name" required />
+
+            <div class="button-group">
+                <button type="submit">FETCH</button>
+                <a href="/developers" class="btn-secondary">DEVELOPERS</a>
+            </div>
+        </form>
+
+        <div th:if="${successMessage}" class="alert alert-success">
+            <p th:text="${successMessage}"></p>
+        </div>
+
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <p th:text="${errorMessage}"></p>
+        </div>
     </div>
 
-    <div th:if="${errorMessage}" class="alert alert-danger">
-        <p th:text="${errorMessage}"></p>
-    </div>
+    <script>
+        document.getElementById("repoForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var owner = document.getElementById("owner").value;
+            var repo = document.getElementById("repo").value;
+            var url = "/fetch/" + owner + "/" + repo;
+            var form = document.createElement("form");
+            form.method = "POST";
+            form.action = url;
+            document.body.appendChild(form);
+            form.submit();
+        });
+    </script>
 </body>
-<script>
-    document.getElementById("repoForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        var owner = document.getElementById("owner").value;
-        var repo = document.getElementById("repo").value;
-
-        var url = "/fetch/" + owner + "/" + repo;
-
-        var form = document.createElement("form");
-        form.method = "POST";
-        form.action = url;
-
-        document.body.appendChild(form);
-        form.submit();
-    });
-</script>
-
 </html>
