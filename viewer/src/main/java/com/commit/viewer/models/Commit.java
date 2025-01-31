@@ -1,5 +1,7 @@
 package com.commit.viewer.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -18,7 +20,7 @@ public class Commit {
 
     String author;
 
-    String timestamp;
+    LocalDateTime timestamp;
 
     @ManyToOne
     @JoinColumn(name = "developer_id")
