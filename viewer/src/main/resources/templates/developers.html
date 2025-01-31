@@ -25,7 +25,7 @@
                         <p>There is no commit available.</p>
                     </div>
                     <div th:if="${!#lists.isEmpty(developer.commits)}">
-                        <p>Commits Count: <span th:text="${#lists.size(developer.commits)}"></span></p>
+                        <p>Last 1 Month Commits Count: <span th:text="${#lists.size(developer.commits)}"></span></p>
                         <a th:href="@{/commits/{username}(username=${developer.username})}">
                             <button>Get Commits</button>
                         </a>

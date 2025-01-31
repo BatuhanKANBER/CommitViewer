@@ -18,6 +18,8 @@
             <p><strong>Timestamp:</strong> <span th:text="${commit.timestamp}"></span></p>
             <p><strong>Message:</strong> <span th:text="${commit.message}"></span></p>
             <p><strong>Author:</strong> <span th:text="${commit.author}"></span></p>
+            <h2>Patch Details</h2>
+            <pre th:text="${commit.patch}" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100%; overflow-x: auto;"></pre>
         </div>
 
         <a class="return" th:href="@{/commits/{username}(username=${commit.author})}">Back</a>

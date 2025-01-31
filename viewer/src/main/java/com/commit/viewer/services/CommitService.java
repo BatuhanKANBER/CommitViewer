@@ -24,9 +24,9 @@ public class CommitService {
         LocalDateTime oneMonthAgo = LocalDateTime.now().minusMonths(1);
         String since = oneMonthAgo.format(DateTimeFormatter.ISO_DATE_TIME);
 
-        List<Map<String, Object>> commits = gitHubClient.getCommits(owner, repo, since);
+        List<Map<String, Object>> commitsForHub = gitHubClient.getCommits(owner, repo, since);
+        for (Map<String, Object> commitData : commitsForHub) {
 
-        for (Map<String, Object> commitData : commits) {
             Map<String, Object> commitDetails = (Map<String, Object>) commitData.get("commit");
             Map<String, Object> authorDetails = (Map<String, Object>) commitDetails.get("author");
             Map<String, Object> userId = (Map<String, Object>) commitData.get("author");
@@ -45,6 +45,21 @@ public class CommitService {
             commit.setDeveloper(developer);
             commit.setTimestamp(
                     LocalDateTime.parse((String) authorDetails.get("date"), DateTimeFormatter.ISO_DATE_TIME));
+
+            Map<String, Object> commitDetailsFromGitHub = gitHubClient.getCommitDetails(owner, repo,
+                    (String) commitData.get("sha"));
+
+            List<Map<String, Object>> files = (List<Map<String, Object>>) commitDetailsFromGitHub.get("files");
+            StringBuilder patchBuilder = new StringBuilder();
+
+            for (Map<String, Object> file : files) {
+                String patch = (String) file.get("patch");
+                if (patch != null) {
+                    patchBuilder.append(patch).append("\n");
+                }
+            }
+
+            commit.setPatch(patchBuilder.toString());
 
             commitRepository.save(commit);
         }
