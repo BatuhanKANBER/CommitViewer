@@ -48,21 +48,22 @@ public class CommitService {
 
             Map<String, Object> commitDetailsFromGitHub = gitHubClient.getCommitDetails(owner, repo,
                     (String) commitData.get("sha"));
-                    
             List<Map<String, Object>> files = (List<Map<String, Object>>) commitDetailsFromGitHub.get("files");
-            StringBuilder patchBuilder = new StringBuilder();
-
-            for (Map<String, Object> file : files) {
-                String patch = (String) file.get("patch");
-                if (patch != null) {
-                    patchBuilder.append(patch).append("\n");
-                }
-            }
-
-            commit.setPatch(patchBuilder.toString());
+            commit.setPatch(getCommitPatchOnGitHub(files).toString());
 
             commitRepository.save(commit);
         }
+    }
+
+    public StringBuilder getCommitPatchOnGitHub(List<Map<String, Object>> files) {
+        StringBuilder patchBuilder = new StringBuilder();
+        for (Map<String, Object> file : files) {
+            String patch = (String) file.get("patch");
+            if (patch != null) {
+                patchBuilder.append(patch).append("\n");
+            }
+        }
+        return patchBuilder;
     }
 
     public List<Commit> getDeveloperCommits(String username) {
