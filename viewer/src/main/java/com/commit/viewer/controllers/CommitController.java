@@ -30,9 +30,9 @@ public class CommitController {
             RedirectAttributes redirectAttributes) {
         try {
             commitService.fetchAndSaveCommits(owner, repo);
-            redirectAttributes.addFlashAttribute("successMessage", "Commitler başarıyla alındı ve kaydedildi!");
+            redirectAttributes.addFlashAttribute("successMessage", "Fetch and save operations successfully!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Hata oluştu. Lütfen tekrar deneyin.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error occurred. Please try again.");
         }
         return "redirect:/";
     }
