@@ -48,7 +48,7 @@ public class CommitService {
 
             Map<String, Object> commitDetailsFromGitHub = gitHubClient.getCommitDetails(owner, repo,
                     (String) commitData.get("sha"));
-
+                    
             List<Map<String, Object>> files = (List<Map<String, Object>>) commitDetailsFromGitHub.get("files");
             StringBuilder patchBuilder = new StringBuilder();
 

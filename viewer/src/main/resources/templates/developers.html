@@ -19,8 +19,6 @@
                 <li th:each="developer : ${developers}">
                     <p><strong>Username:</strong> <span th:text="${developer.username}"></span></p>
                     <p><strong>Email:</strong> <span th:text="${developer.email}"></span></p>
-
-                    <h3>Commits:</h3>
                     <div th:if="${#lists.isEmpty(developer.commits)}">
                         <p>There is no commit available.</p>
                     </div>
