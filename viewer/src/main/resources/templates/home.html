@@ -34,6 +34,10 @@
         <div th:if="${errorMessage}" class="alert alert-danger">
             <p th:text="${errorMessage}"></p>
         </div>
+
+        <div th:if="${feingErrorMessage}" class="alert alert-warning">
+            <p th:text="${feingErrorMessage}"></p>
+        </div>
     </div>
 
     <script>

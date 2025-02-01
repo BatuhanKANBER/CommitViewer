@@ -22,7 +22,7 @@
             <pre th:text="${commit.patch}" style="white-space: pre-wrap; word-wrap: break-word; max-width: 100%; overflow-x: auto;"></pre>
         </div>
 
-        <a class="return" th:href="@{/commits/{username}(username=${commit.author})}">Back</a>
+        <a class="return" th:href="@{/commits/{username}(username=${commit.committer})}">Back</a>
     </div>
 </body>
 

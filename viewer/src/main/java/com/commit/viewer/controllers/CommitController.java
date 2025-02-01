@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.commit.viewer.models.Commit;
 import com.commit.viewer.services.CommitService;
 
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -30,8 +31,10 @@ public class CommitController {
         try {
             commitService.fetchAndSaveCommits(owner, repo);
             redirectAttributes.addFlashAttribute("successMessage", "Commitler başarıyla alındı ve kaydedildi!");
+        } catch (FeignException e) {
+            redirectAttributes.addFlashAttribute("feingErrorMessage", e.getMessage());
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Repo bulunamadı. Lütfen tekrar deneyin.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Hata oluştu. Lütfen tekrar deneyin.");
         }
         return "redirect:/";
     }
@@ -43,9 +46,9 @@ public class CommitController {
         return "commits";
     }
 
-    @GetMapping("/commit/{hash}")
-    public String getCommit(@PathVariable String hash, Model model) {
-        Commit commit = commitService.getCommit(hash);
+    @GetMapping("/commit/{id}")
+    public String getCommit(@PathVariable Long id, Model model) {
+        Commit commit = commitService.getCommit(id);
         model.addAttribute("commit", commit);
         return "commit_details";
     }

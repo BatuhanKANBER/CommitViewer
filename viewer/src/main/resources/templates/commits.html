@@ -18,7 +18,8 @@
                 <p><strong>Hash:</strong> <span th:text="${commit.hash}"></span></p>
                 <p><strong>Timestamp:</strong> <span th:text="${commit.timestamp}"></span></p>
                 <p><strong>Author:</strong> <span th:text="${commit.author}"></span></p>
-                <a th:href="@{/commit/{hash}(hash=${commit.hash})}">
+                <p><strong>Provider:</strong> <span th:text="${commit.provider}"></span></p>
+                <a th:href="@{/commit/{id}(id=${commit.id})}">
                     <button class="btn-detail">Detail</button>
                 </a>
             </li>
