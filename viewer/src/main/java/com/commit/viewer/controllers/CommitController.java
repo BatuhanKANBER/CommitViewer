@@ -31,8 +31,6 @@ public class CommitController {
         try {
             commitService.fetchAndSaveCommits(owner, repo);
             redirectAttributes.addFlashAttribute("successMessage", "Commitler başarıyla alındı ve kaydedildi!");
-        } catch (FeignException e) {
-            redirectAttributes.addFlashAttribute("feingErrorMessage", e.getMessage());
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Hata oluştu. Lütfen tekrar deneyin.");
         }
