@@ -12,7 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.commit.viewer.models.Commit;
 import com.commit.viewer.services.CommitService;
 
-import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -32,7 +31,7 @@ public class CommitController {
             commitService.fetchAndSaveCommits(owner, repo);
             redirectAttributes.addFlashAttribute("successMessage", "Fetch and save operations successfully!");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error occurred. Please try again.");
+            redirectAttributes.addFlashAttribute("errorMessage", "API rate limit exceeded.");
         }
         return "redirect:/";
     }

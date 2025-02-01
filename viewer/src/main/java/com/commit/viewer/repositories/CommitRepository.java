@@ -9,4 +9,6 @@ import com.commit.viewer.models.Developer;
 
 public interface CommitRepository extends JpaRepository<Commit, Long> {
         List<Commit> findByDeveloper(Developer developer);
+
+        boolean existsByHash(String hash);
 }
