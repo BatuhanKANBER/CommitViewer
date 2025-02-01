@@ -4,7 +4,7 @@ CommitViewer is a tool designed to visualize the commit history of Git repositor
 
 ## Features
 
-- Listing commits from public repositories on GitHub and GitLab providers
+- Listing the last 1 month's commits from public repositories on GitHub and GitLab providers.
 - Viewing detailed information of commits
 - Storing data in a database
 
