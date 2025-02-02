@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.commit.viewer.models.Commit;
 import com.commit.viewer.services.CommitService;
 
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -29,11 +30,12 @@ public class CommitController {
             RedirectAttributes redirectAttributes) {
         try {
             commitService.fetchAndSaveCommits(owner, repo);
-            redirectAttributes.addFlashAttribute("successMessage", "Fetch and save operations successfully!");
+        } catch (FeignException e) {
+            redirectAttributes.addFlashAttribute("feingMessage", "API rate limit exceeded.");
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "API rate limit exceeded.");
+            redirectAttributes.addFlashAttribute("errorMessage", "Error occured. Please check your owner and repo names.");
         }
-        return "redirect:/";
+        return "redirect:/developers";
     }
 
     @GetMapping("/commits/{username}")
