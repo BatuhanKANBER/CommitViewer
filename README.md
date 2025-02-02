@@ -57,3 +57,5 @@ CommitViewer is a tool designed to visualize the commit history of Git repositor
 ![Commits](https://github.com/user-attachments/assets/4bab360c-5d87-4dc8-84db-4f8a4740a01e)
 ## Commit Details Page
 ![CommitDetails](https://github.com/user-attachments/assets/50f500ba-5d5c-409e-8630-62611fed658e)
+
+## This project depoled with aws, pulic ip address: 13.48.44.185
