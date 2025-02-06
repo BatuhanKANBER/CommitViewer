@@ -14,10 +14,12 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "commits")
+@NoArgsConstructor
 public class Commit {
 
     @Id
@@ -44,4 +46,15 @@ public class Commit {
     @Enumerated(EnumType.STRING)
     @Column(name = "provider")
     Provider provider;
+
+    public Commit(String hash, String message, String comitter, String author, LocalDateTime timestamp,
+            Developer developer, Provider provider) {
+        this.hash = hash;
+        this.message = message;
+        this.committer = comitter;
+        this.author = author;
+        this.timestamp = timestamp;
+        this.developer = developer;
+        this.provider = provider;
+    }
 }

@@ -59,7 +59,7 @@ public class CommitService {
                     DateTimeFormatter.ISO_DATE_TIME);
             Developer developer = getOrSaveDeveloper(username, email);
 
-            Commit commit = buildCommit(commitData, developer, hash, message, author, timestamp, Provider.GITHUB);
+            Commit commit = new Commit(hash, message, username, author, timestamp, developer, Provider.GITHUB);
             Map<String, Object> commitDetailsFromGitHub = gitHubClient.getCommitDetails(owner, repo, hash);
 
             if (commitDetailsFromGitHub != null && commitDetailsFromGitHub.containsKey("files")) {
@@ -91,7 +91,7 @@ public class CommitService {
                     DateTimeFormatter.ISO_DATE_TIME);
             Developer developer = getOrSaveDeveloper(username, email);
 
-            Commit commit = buildCommit(commitData, developer, hash, message, author, timestamp, Provider.GITLAB);
+            Commit commit = new Commit(hash, message, username, author, timestamp, developer, Provider.GITLAB);
             List<Map<String, Object>> commitDetailsFromGitLab = gitLabClient.getCommitDetails(id, hash);
 
             if (commitDetailsFromGitLab != null) {
@@ -108,19 +108,6 @@ public class CommitService {
             developer = developerService.getDeveloper(username);
         }
         return developer;
-    }
-
-    private Commit buildCommit(Map<String, Object> commitData, Developer developer, String hash, String message,
-            String author, LocalDateTime timestamp, Provider provider) {
-        Commit commit = new Commit();
-        commit.setHash(hash);
-        commit.setMessage(message);
-        commit.setCommitter(developer.getUsername());
-        commit.setAuthor(author);
-        commit.setDeveloper(developer);
-        commit.setTimestamp(timestamp);
-        commit.setProvider(provider);
-        return commit;
     }
 
     public StringBuilder getCommitPatchFromGitHub(List<Map<String, Object>> files) {
