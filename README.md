@@ -58,4 +58,4 @@ CommitViewer is a tool designed to visualize the commit history of Git repositor
 ## Commit Details Page
 ![CommitDetails](https://github.com/user-attachments/assets/50f500ba-5d5c-409e-8630-62611fed658e)
 
-## This project is deployed on AWS, with the public IP address: 13.48.44.185
+## This project is deployed on AWS: https://commitviewer.online/
