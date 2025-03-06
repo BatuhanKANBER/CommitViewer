@@ -1,4 +1,4 @@
-### This project deployed by render: www.commitviewer.online
+### This project deployed by render: commitviewer.online
 
 # CommitViewer
 
